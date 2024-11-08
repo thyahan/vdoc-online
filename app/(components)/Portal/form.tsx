@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { version } from "../../../package.json";
 
 type Props = {
   onSubmit: ({ roomName, username }: { roomName: string; username: string }) => void;
@@ -39,6 +40,7 @@ export default function FormPortal({ onSubmit }: Props) {
         className="p-4 font-bold px-8 mt-16 bg-slate-700 rounded-md shadow-md hover:bg-slate-600 text-white">
         Join Room
       </button>
+      <small className="w-full text-center">v{version}</small>
     </div>
   );
 }
