@@ -3,22 +3,31 @@
 import AgentRenderer from "@/app/(components)/Room/AgentRenderer";
 import CustomerRenderer from "@/app/(components)/Room/CustomerRenderer";
 import { LiveKitRoom } from "@livekit/components-react";
+import { useSearchParams } from "next/navigation";
 
 function getRole() {
+  if (typeof window === "undefined") return "";
   return window.localStorage.getItem("username")?.toLocaleLowerCase().includes("agent") ? "agent" : "customer";
 }
 
 function getRoomName() {
+  if (typeof window === "undefined") return "";
   return window.localStorage.getItem("roomName");
 }
 
-export default function Room({ token }: { token: string }) {
+export default function Room() {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
   const role = getRole();
   const roomName = getRoomName();
 
   const smallBox =
     "lg:w-[240px] lg:h-[320px] p-2 w-[120px] h-[180px] flex justify-center absolute top-4 right-4 z-20 border border-red-500";
   const largeBox = "w-screen h-screen p-2 bg-black flex items-center justify-center border border-red-500";
+
+  if (!token) {
+    return <div>Invalid token</div>;
+  }
 
   return (
     <LiveKitRoom audio={true} video={true} token={token} serverUrl={process.env.NEXT_PUBLIC_WS_URL}>
