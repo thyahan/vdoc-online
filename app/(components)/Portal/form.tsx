@@ -20,6 +20,7 @@ export default function FormPortal({ onSubmit }: Props) {
         name="roomName"
         onChange={e => setState({ ...state, roomName: e.target.value })}
       />
+      <i>{`room name ใส่อะไรก็ได้ แค่ตั้งชื่อให้ตรงกัน เช่น "vdoc1"`}</i>
       <input
         className="w-full border border-gray-500 rounded-md p-2"
         type="text"
@@ -28,6 +29,8 @@ export default function FormPortal({ onSubmit }: Props) {
         name="roomName"
         onChange={e => setState({ ...state, username: e.target.value })}
       />
+      <i>{`สำหรับ Agent ใส่ username "agent"`}</i>
+      <i>{`สำหรับ Customer ใส่ username "customer"`}</i>
       <button
         onClick={() => {
           console.log("click submit form button current value is ", state);
